@@ -1,0 +1,1 @@
+- invitation URL `https://discord.com/api/oauth2/authorize?client_id=816339342796390402&permissions=3072&scope=bot`

@@ -1,13 +1,10 @@
 {
   "compilerOptions": {
     "target": "ES2018",
-    "module": "ESNext",
     "moduleResolution": "Node",
     "lib": [
-      "ESNext",
-      "ESNext.AsyncIterable"
+      "ESNext"
     ],
-    "esModuleInterop": true,
     "strict": true,
     "baseUrl": ".",
     "types": [
