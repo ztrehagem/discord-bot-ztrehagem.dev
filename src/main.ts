@@ -2,6 +2,8 @@ require('dotenv').config()
 
 import * as discord from 'discord.js'
 import commandEcho from './commands/echo'
+import commandRegister from './commands/register'
+import commandBattle from './commands/battle'
 
 const client = new discord.Client()
 
@@ -25,7 +27,15 @@ client.on('message', (message) => {
       commandEcho(message, {
         payload: payload.slice(4).trim()
       })
-      break;
+      break
+
+    case 'register':
+      commandRegister(message)
+      break
+
+    case 'battle':
+      commandBattle(message)
+      break
   }
 })
 
