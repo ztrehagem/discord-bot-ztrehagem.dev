@@ -8,16 +8,14 @@ export default (message: Message) => {
 
   if (!guild || !member) return
 
-  const memberName = member.nickname ?? member.displayName
-
   const id = User.generateId(guild, member)
 
   if (store.users.has(id)) {
-    message.channel.send(`${memberName}, you are already registered.`)
+    message.channel.send(`<@${member.user.id}> You are already registered.`)
     return
   }
 
   store.users.set(id, new User(id))
 
-  message.channel.send(`${memberName}, registration succeeded!`)
+  message.channel.send(`<@${member.user.id}> Registration succeeded!`)
 }

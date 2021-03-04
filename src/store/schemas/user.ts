@@ -2,8 +2,8 @@ import { Guild, GuildMember } from "discord.js"
 
 export class User {
   readonly id: string
-  protected exp = 0
-  protected level = 1
+  #exp = 0
+  #level = 1
 
   constructor(id: string) {
     this.id = id
@@ -13,30 +13,38 @@ export class User {
     return `${guild.id}/${member.id}`
   }
 
-  getExpRate() {
-    return this.exp / this.level
+  get requiredExp() {
+    return this.#level * 5
   }
 
-  getExpPercentage() {
-    return Math.floor(this.getExpRate() * 100).toPrecision(3)
+  get expRate() {
+    return this.#exp / this.requiredExp
   }
 
-  getLevel() {
-    return this.level
+  get expPercentage() {
+    return Math.floor(this.expRate * 100).toFixed(1)
+  }
+
+  get level() {
+    return this.#level
   }
 
   earnExp() {
-    this.exp += 1
+    const earnedExp = Math.ceil(Math.random() * 3)
+    let levelUp = false
 
-    const overflow = this.exp - this.level
+    this.#exp += earnedExp
+    const overflow = this.#exp - this.requiredExp
 
     if (overflow >= 0) {
-      this.level += 1
-      this.exp = overflow
-
-      return true
+      this.#level += 1
+      this.#exp = overflow
+      levelUp = true
     }
 
-    return false
+    return {
+      levelUp,
+      earnedExp,
+    }
   }
 }
