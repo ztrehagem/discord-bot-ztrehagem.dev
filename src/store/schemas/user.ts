@@ -1,9 +1,11 @@
 import { Guild, GuildMember } from "discord.js"
+import { Stamina } from "./stamina"
 
 export class User {
   readonly id: string
   #exp = 0
   #level = 1
+  readonly stamina = new Stamina({ limit: 10 })
 
   constructor(id: string) {
     this.id = id
@@ -46,5 +48,13 @@ export class User {
       levelUp,
       earnedExp,
     }
+  }
+
+  toString(): string {
+    const buf = []
+    buf.push(`Lv. ${this.level}`)
+    buf.push(`Exp. ${this.#exp} / ${this.requiredExp} (${this.expPercentage}%)`)
+    buf.push(`Stamina ${this.stamina.getCurrent()}`)
+    return buf.join('\n')
   }
 }

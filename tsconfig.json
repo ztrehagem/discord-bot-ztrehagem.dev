@@ -3,7 +3,8 @@
     "target": "ES2018",
     "moduleResolution": "Node",
     "lib": [
-      "ESNext"
+      "ESNext",
+      "ES6"
     ],
     "strict": true,
     "baseUrl": "./src",

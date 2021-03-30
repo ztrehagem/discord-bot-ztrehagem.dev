@@ -3,6 +3,7 @@ require('dotenv').config()
 import * as discord from 'discord.js'
 import commandEcho from './commands/echo'
 import commandRegister from './commands/register'
+import commandStatus from './commands/status'
 import commandBattle from './commands/battle'
 
 const client = new discord.Client()
@@ -31,6 +32,10 @@ client.on('message', (message) => {
 
     case 'register':
       commandRegister(message)
+      break
+
+    case 'status':
+      commandStatus(message)
       break
 
     case 'battle':
