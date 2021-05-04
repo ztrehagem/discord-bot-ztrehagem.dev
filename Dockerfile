@@ -12,5 +12,5 @@ WORKDIR /root
 
 RUN npm ci --production
 
-# CMD ["npm", "start"]
-CMD ["tail", "-f", "/dev/null"]
+CMD ["npm", "start"]
+# CMD ["tail", "-f", "/dev/null"]

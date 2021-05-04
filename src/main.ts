@@ -45,8 +45,8 @@ client.on('message', (message) => {
 })
 
 client.login(process.env.DISCORD_BOT_TOKEN).then((value) => {
-  console.log('logged in:', value)
+  console.log('logged in')
 }).catch((reason) => {
-  console.error('failed to login')
+  console.log('failed to login')
   console.error(reason)
 })
