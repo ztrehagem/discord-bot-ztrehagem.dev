@@ -54,7 +54,7 @@ export class User {
     const buf = []
     buf.push(`Lv. ${this.level}`)
     buf.push(`Exp. ${this.#exp} / ${this.requiredExp} (${this.expPercentage}%)`)
-    buf.push(`Stamina ${this.stamina.getCurrent()}`)
+    buf.push(`Stamina ${this.stamina.getCurrent()} / ${this.stamina.limit}`)
     return buf.join('\n')
   }
 }

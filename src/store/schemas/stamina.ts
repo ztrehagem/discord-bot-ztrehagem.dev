@@ -3,15 +3,16 @@ interface Options {
 }
 
 export class Stamina {
-  #consumed = 0
+  #value: number
   #limit: number
-  #time = Date.now()
+  #consumedAt = Date.now()
 
   // 1 minute
-  static readonly healingInterval = 1000 * 60
+  static readonly interval = 1000 * 60
 
   constructor(options: Options) {
     this.#limit = options.limit
+    this.#value = options.limit
   }
 
   get limit() {
@@ -19,25 +20,28 @@ export class Stamina {
   }
 
   getCurrent() {
-    const timeDiff = Date.now() - this.#time
-    const healed = Math.floor(timeDiff / Stamina.healingInterval)
-    const potential = this.#limit - this.#consumed + healed
-    return Math.min(this.#limit, potential)
+    const elapsed = Date.now() - this.#consumedAt
+    const healed = Math.floor(elapsed / Stamina.interval)
+    return Math.min(this.#limit, this.#value + healed)
   }
 
   consume(value: number): boolean {
-    const current = this.getCurrent()
+    const now = Date.now()
+    const elapsed = now - this.#consumedAt
+    const healed = Math.floor(elapsed / Stamina.interval)
+    const current = Math.min(this.#limit, this.#value + healed)
 
     if (current < value) {
       return false
     }
 
-    if (current === this.limit) {
-      this.#time = Date.now()
-      this.#consumed = 0
+    if (current === this.#limit) {
+      this.#consumedAt = now
+    } else {
+      this.#consumedAt += healed * Stamina.interval
     }
 
-    this.#consumed += value
+    this.#value = current - value
 
     return true
   }
