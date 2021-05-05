@@ -21,7 +21,8 @@ export class Stamina {
   getCurrent() {
     const timeDiff = Date.now() - this.#time
     const healed = Math.floor(timeDiff / Stamina.healingInterval)
-    return Math.min(this.#limit - this.#consumed + healed)
+    const potential = this.#limit - this.#consumed + healed
+    return Math.min(this.#limit, potential)
   }
 
   consume(value: number): boolean {
