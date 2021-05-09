@@ -1,16 +1,14 @@
 FROM node:14.16.0
 
-WORKDIR /root
+WORKDIR /root/app
 
-COPY package.json /root/
-COPY package-lock.json /root/
+COPY package.json ./
+COPY package-lock.json ./
 
-# RUN npm ci --production
-RUN npm i
+RUN npm ci --production
 
-COPY tsconfig.json /root/
-COPY .env /root/
-COPY src/* /root/src/
+COPY tsconfig.json ./
+COPY .env ./
+COPY src/ ./src/
 
-CMD ["npm", "start"]
-# CMD ["tail", "-f", "/dev/null"]
+CMD ["tail", "-f", "/dev/null"]
