@@ -5,7 +5,8 @@ WORKDIR /root/app
 COPY package.json ./
 COPY package-lock.json ./
 
-RUN npm ci --production
+# RUN npm ci --production
+RUN npm ci
 
 COPY tsconfig.json ./
 COPY .env ./
