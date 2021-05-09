@@ -11,4 +11,4 @@ COPY tsconfig.json ./
 COPY .env ./
 COPY src/ ./src/
 
-CMD ["tail", "-f", "/dev/null"]
+CMD ["npm", "start"]
